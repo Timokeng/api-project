@@ -1,6 +1,6 @@
-# my-project
+# api-project
 
-> A Mpvue project
+> A express project
 
 ## Build Setup
 
