@@ -6,6 +6,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var testRouter = require('./routes/test')
+
 // import router
 var posts = require('./routes/posts');
 var post = require('./routes/post');
@@ -35,8 +37,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/test', testRouter);
+
 // 设置跨域访问
-/*
 app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");//*表示允许的域名地址，本地则为'http://localhost' 
   res.header("Access-Control-Allow-Headers", "X-Requested-With, Authorization");
@@ -46,10 +51,7 @@ app.all('*', function(req, res, next) {
   res.header("Cache-Control", "no-store");
   next();
 });
-*/
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/posts', posts);
 app.use('/post', post);
 app.use('/theme', theme);
