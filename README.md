@@ -24,6 +24,19 @@ npm start
 # 点赞
 ```
 
+## Err Code
+```bash
+0 成功
+
+1 参数错误
+
+2 数据库错误
+
+3 已无更多数据
+
+-1 token失效
+```
+
 ## Work Plan
 
 ``` bash
