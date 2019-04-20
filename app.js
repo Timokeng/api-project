@@ -37,6 +37,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// 设置全局变量，通过token做鉴权，提出当前用户信息并设置为全局变量
+global.userInfo = {
+  id: 1
+};
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/test', testRouter);
