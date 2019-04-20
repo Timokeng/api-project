@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 var URL = require('url');
+var base = require('../base.js')
 
 // 创建连接
 var connection = mysql.createConnection({
@@ -13,25 +14,20 @@ var connection = mysql.createConnection({
 connection.connect();
 
 // 构造sql语句
-var sql = 'SELECT * FROM posts';
+var sql = 'SELECT * FROM posts ORDER BY lastModified desc';
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   var params = URL.parse(req.url, true).query;
   // 参数错误返回结果
   if(params.page < 1 || !params.page){
-    res.send({
-      code: 1,
-      data: {
-        message: '参数错误'
-      }
-    });
+    base.sendErr(res, 1);
     return;
   }
   // 正常数据库数据提取和返回流程
   connection.query(sql, function(err, result){
     if(err){
-      console.log(err.message);
+      base.sendErr(res, 2, err);
       return;
     }
     var list = result.slice((params.page - 1) * 10, (params.page * 10));
@@ -43,12 +39,7 @@ router.get('/', function(req, res, next) {
         }
       });
     } else{
-      res.send({
-        code: 2,
-        data: {
-          message: '已经无更多数据'
-        }
-      });
+      base.sendErr(res, 3);
     }
   })
 });
