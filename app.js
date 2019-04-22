@@ -57,10 +57,10 @@ app.all('*', function(req, res, next) {
   next();
 });
 
-app.use('/posts', posts);
-app.use('/post', post);
-app.use('/theme', theme);
-app.use('/topList', topList);
+app.use('/posts', posts);// 完成
+app.use('/post', post);// 完成
+app.use('/theme', theme);// 完成
+app.use('/topList', topList);// 完成
 app.use('/createAccount', createAccount);
 app.use('/token', token);
 app.use('/mineCollect', mineCollect);
