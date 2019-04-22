@@ -63,8 +63,8 @@ app.use('/theme', theme);// 完成
 app.use('/topList', topList);// 完成
 app.use('/createAccount', createAccount);
 app.use('/token', token);
-app.use('/mineCollect', mineCollect);
-app.use('/minePost', minePost);
+app.use('/mineCollect', mineCollect);// 完成
+app.use('/minePost', minePost);// 完成
 app.use('/image', imageRouter);
 app.use('/commit', commit);
 app.use('/delete', deleteRouter);
@@ -86,7 +86,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send(err);
 });
 
 module.exports = app;
