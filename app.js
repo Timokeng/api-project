@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var base = require('./base')
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testRouter = require('./routes/test')
@@ -38,9 +40,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // 设置全局变量，通过token做鉴权，提出当前用户信息并设置为全局变量
-global.userInfo = {
-  id: 1
-};
+app.use(base.getCurUserInfo);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
