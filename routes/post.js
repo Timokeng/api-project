@@ -21,7 +21,7 @@ var ifCollectSql = 'SELECT * FROM collect WHERE userId=? AND postId=?';
 var getReplySql = 'SELECT * FROM reply1 WHERE parentId=?';
 var getChildReplySql = 'SELECT * FROM reply2 WHERE parentId=?';
 
-// 各内容实现方法
+// 数据获取方法（Promise）
 // ==获取帖子信息
 function getPostInfo(data, res){
   return new Promise(function(resolve, reject){
