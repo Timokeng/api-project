@@ -68,7 +68,7 @@ app.use('/minePost', minePost);// 完成
 app.use('/image', imageRouter);
 app.use('/commit', commit);// 完成
 app.use('/delete', deleteRouter);// 完成
-app.use('/collect', collect);
+app.use('/collect', collect);// 完成
 app.use('/like', like);
 app.use('/review', review);
 app.use('/search', searchRouter);
