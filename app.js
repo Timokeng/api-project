@@ -66,8 +66,8 @@ app.use('/token', token);
 app.use('/mineCollect', mineCollect);// 完成
 app.use('/minePost', minePost);// 完成
 app.use('/image', imageRouter);
-app.use('/commit', commit);
-app.use('/delete', deleteRouter);
+app.use('/commit', commit);// 完成
+app.use('/delete', deleteRouter);// 完成
 app.use('/collect', collect);
 app.use('/like', like);
 app.use('/review', review);
