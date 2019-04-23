@@ -9,6 +9,21 @@
     <body>
         <div id="app">
             <h1>测试页面</h1>
+            <div>
+                <div>
+                    <span>标题</span>
+                    <input v-model="post.title" />
+                </div>
+                <div>
+                    <span>正文</span>
+                    <input v-model="post.message"/>
+                </div>
+                <div>
+                    <span>图片</span>
+                    <input v-model="post.images"/>
+                </div>
+                <button @click="commitPost">发帖</button>
+            </div>
         </div>
         <script src="../javascripts/test.js"></script>
     </body>
