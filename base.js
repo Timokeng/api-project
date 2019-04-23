@@ -43,6 +43,10 @@ function sendErr(res, code, err){
 function getCurUserInfo(req, res, next){
   // 现在测试阶段暂不使用 var token = req.get('Authorization');
   var token = '201904192';
+  if(!token){
+    sendErr(-999);
+    return;
+  }
 
   // 与数据库创建连接
   var connection = mysql.createConnection({

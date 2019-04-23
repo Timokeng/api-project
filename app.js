@@ -69,7 +69,7 @@ app.use('/image', imageRouter);
 app.use('/commit', commit);// 完成
 app.use('/delete', deleteRouter);// 完成
 app.use('/collect', collect);// 完成
-app.use('/like', like);
+app.use('/like', like);// 完成
 app.use('/review', review);
 app.use('/search', searchRouter);
 
