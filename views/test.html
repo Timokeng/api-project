@@ -24,6 +24,21 @@
                 </div>
                 <button @click="commitPost">发帖</button>
             </div>
+            <div>
+                <div>
+                    <span>id</span>
+                    <input v-model="reply.id" />
+                </div>
+                <div>
+                    <span>pos</span>
+                    <input v-model="reply.pos"/>
+                </div>
+                <div>
+                    <span>message</span>
+                    <input v-model="reply.str"/>
+                </div>
+                <button @click="replyFun">评论</button>
+            </div>
         </div>
         <script src="../javascripts/test.js"></script>
     </body>
