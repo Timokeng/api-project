@@ -26,6 +26,7 @@ var collect = require('./routes/collect');
 var like = require('./routes/like');
 var review = require('./routes/review');
 var searchRouter = require('./routes/search');
+var top = require('./routes/top');
 
 var app = express();
 
@@ -72,6 +73,7 @@ app.use('/delete', deleteRouter);// 完成
 app.use('/collect', collect);// 完成
 app.use('/like', like);// 完成
 app.use('/review', review);
+app.use('/top', top);
 app.use('/search', searchRouter);
 
 // catch 404 and forward to error handler
