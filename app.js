@@ -64,7 +64,7 @@ app.use('/posts', posts);// 完成
 app.use('/post', post);// 完成
 app.use('/theme', theme);// 完成
 app.use('/topList', topList);// 完成
-app.use('/createAccount', createAccount);
+app.use('/createAccount', createAccount);// 完成
 app.use('/mineCollect', mineCollect);// 完成
 app.use('/minePost', minePost);// 完成
 app.use('/image', imageRouter);// 完成
