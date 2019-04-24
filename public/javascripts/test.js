@@ -30,6 +30,18 @@ var app = new Vue({
             }, function(res){
                 console.log(res)
             })
+        },
+        upload: function(){
+            var upload = document.getElementById('upload');
+            var file = upload.files[0];
+            var formDate = new FormData();
+            formDate.append('file', file)
+            let url = 'http://localhost:3000/image';
+            this.$http.post(url, formDate, {emulateJSON:true}).then(function(res){
+                console.log(res)
+            }, function(res){
+                console.log(res)
+            })
         }
     }
 });

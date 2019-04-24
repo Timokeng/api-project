@@ -72,8 +72,8 @@ app.use('/commit', commit);// 完成
 app.use('/delete', deleteRouter);// 完成
 app.use('/collect', collect);// 完成
 app.use('/like', like);// 完成
-app.use('/review', review);
-app.use('/top', top);
+app.use('/review', review);// 完成
+app.use('/top', top);// 完成
 app.use('/search', searchRouter);
 
 // catch 404 and forward to error handler
