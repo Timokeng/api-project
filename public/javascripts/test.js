@@ -11,6 +11,10 @@ var app = new Vue({
                 id: 0,
                 pos: -1,
                 str: ''
+            },
+            user: {
+                nickName: '',
+                avatarUrl: ''
             }
         }
     },
@@ -38,6 +42,14 @@ var app = new Vue({
             formDate.append('file', file)
             let url = 'http://localhost:3000/image';
             this.$http.post(url, formDate, {emulateJSON:true}).then(function(res){
+                console.log(res)
+            }, function(res){
+                console.log(res)
+            })
+        },
+        commitUser: function(){
+            let url = 'http://localhost:3000/createAccount';
+            this.$http.post(url, this.user, {emulateJSON:true}).then(function(res){
                 console.log(res)
             }, function(res){
                 console.log(res)

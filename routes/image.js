@@ -15,7 +15,6 @@ var upload = multer({
 });
  
 router.use('/', upload.single('file'), function (req, res, next) {
-  console.log(req.file)
   var url = 'http://' + req.headers.host + '/images/' + req.file.filename;
   res.send({
     code: 0,

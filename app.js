@@ -67,7 +67,7 @@ app.use('/topList', topList);// 完成
 app.use('/createAccount', createAccount);
 app.use('/mineCollect', mineCollect);// 完成
 app.use('/minePost', minePost);// 完成
-app.use('/image', imageRouter);
+app.use('/image', imageRouter);// 完成
 app.use('/commit', commit);// 完成
 app.use('/delete', deleteRouter);// 完成
 app.use('/collect', collect);// 完成

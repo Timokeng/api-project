@@ -42,6 +42,17 @@
             <div>
                 <input type="file" id="upload" @change="upload" />
             </div>
+            <div>
+                <div>
+                    <span>昵称</span>
+                    <input v-model="user.nickName" />
+                </div>
+                <div>
+                    <span>头像</span>
+                    <input v-model="user.avatarUrl"/>
+                </div>
+                <button @click="commitUser">注册</button>
+            </div>
         </div>
         <script src="../javascripts/test.js"></script>
     </body>
