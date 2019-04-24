@@ -39,9 +39,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 设置全局变量，通过token做鉴权，提出当前用户信息并设置为全局变量
-app.use(base.getCurUserInfo);
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/test', testRouter);
@@ -57,12 +54,16 @@ app.all('*', function(req, res, next) {
   next();
 });
 
+app.use('/token', token);
+
+// 设置全局变量，通过token做鉴权，提出当前用户信息并设置为全局变量
+app.use(base.getCurUserInfo);
+
 app.use('/posts', posts);// 完成
 app.use('/post', post);// 完成
 app.use('/theme', theme);// 完成
 app.use('/topList', topList);// 完成
 app.use('/createAccount', createAccount);
-app.use('/token', token);
 app.use('/mineCollect', mineCollect);// 完成
 app.use('/minePost', minePost);// 完成
 app.use('/image', imageRouter);
