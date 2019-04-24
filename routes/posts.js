@@ -15,23 +15,22 @@ connection.connect();
 
 // 构造sql语句
 var sql = 'SELECT * FROM posts ORDER BY lastModified desc';
-var getUserSql = 'SELECT * FROM user_info WHERE id=?'
+var getUserSql = 'SELECT * FROM user_info WHERE id=?';
+var judgeIfTopSql = 'SELECT * FROM top WHERE postId=?';
 
 // 数据获取方法（Promise）
 // ==获取帖子列表
-function getPosts(res, page){
+function getPosts(page){
   return new Promise(function(resolve, reject){
     connection.query(sql, function(err, result){
       if(err){
-        base.sendErr(res, 2, err);
-        reject()
+        reject(err)
         return;
       }
       var list = result.slice((page - 1) * 10, (page * 10));
       if(list.length){
         resolve(list);
-      } else{
-        base.sendErr(res, 3);
+
         reject();
       }
     })
@@ -39,12 +38,11 @@ function getPosts(res, page){
 }
 
 // ==获取用户信息
-function getUserInfo(res, postInfo){
+function getUserInfo(postInfo){
   return new Promise(function(resolve, reject){
     connection.query(getUserSql, [postInfo.userId], function(err, result){
       if(err){
-        console.log(err);
-        reject();
+        reject(err);
       } else{
         if(result.length){
           var data = {
@@ -57,8 +55,26 @@ function getUserInfo(res, postInfo){
           };
           resolve(data);
         } else{
-          console.log('用户信息无效')
           reject();
+        }
+      }
+    })
+  })
+}
+
+// ==判断是否置顶
+function judgeIfTop(data){
+  return new Promise(function(resolve, reject){
+    connection.query(judgeIfTopSql, [data.id], function(err, result){
+      if(err){
+        reject(err);
+      } else{
+        if(result.length){
+          data.top = true;
+          resolve(data);
+        } else{
+          data.top = false;
+          resolve(data);
         }
       }
     })
@@ -72,19 +88,39 @@ router.get('/', function(req, res, next) {
   if(params.page < 1 || !params.page){
     base.sendErr(res, 1);
   } else{
-    getPosts(res, params.page).then(function(result){
-      var list = [];
+    getPosts(params.page).then(function(result){
+      let list = [];
       for(let i = 0; i < result.length; i++){
-        list.push(getUserInfo(res, result[i]));
+        list.push(getUserInfo(result[i]));
       }
-      Promise.all(list).then(function(resu){
-        res.send({
-          code: 0,
-          data: {
-            list: resu
-          }
+      return new Promise(function(resolve, reject){
+        Promise.all(list).then(function(res){
+          resolve(res);
         })
       })
+    }).then(function(result){
+      let list = [];
+      for(let i = 0; i < result.length; i++){
+        list.push(judgeIfTop(result[i]))
+      }
+      return new Promise(function(resolve, reject){
+        Promise.all(list).then(function(res){
+          resolve(res);
+        })
+      })
+    }).then(function(result){
+      res.send({
+        code: 0,
+        data: {
+          list: result
+        }
+      })
+    }).catch(function(err){
+      if(err){
+        base.sendErr(res, 2, err);
+      } else{
+        base.sendErr(res, 3);
+      }
     })
   }
 });
