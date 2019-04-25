@@ -155,7 +155,7 @@ router.get('/', function(req, res, next) {
         return new Promise(function(resolve, reject){
           Promise.all(list).then(function(resu){
             for(let i = 0; i < result.reply.length; i++){       
-              result.reply[i].child = resu[i];
+              result.reply[i].children = resu[i];
             }
             resolve(result);
           })
@@ -171,13 +171,14 @@ router.get('/', function(req, res, next) {
           })
         })
       }).then(function(result){
+        let imageList = JSON.parse(result.postInfo.images);
         var data = {
           id: result.postInfo.id,
           title: result.postInfo.title,
           author: result.userInfo.nickName,
           userImg: result.userInfo.avatarUrl,
           message: result.postInfo.message,
-          imageList: result.postInfo.images,
+          imageList: imageList,
           collect: result.collect,
           like: result.like,
           reply: result.reply
@@ -199,7 +200,7 @@ router.get('/', function(req, res, next) {
         return new Promise(function(resolve, reject){
           Promise.all(list).then(function(resu){
             for(let i = 0; i < result.reply.length; i++){       
-              result.reply[i].child = resu[i];
+              result.reply[i].children = resu[i];
             }
             resolve(result);
           })

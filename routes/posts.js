@@ -30,7 +30,7 @@ function getPosts(page){
       var list = result.slice((page - 1) * 10, (page * 10));
       if(list.length){
         resolve(list);
-
+      } else{
         reject();
       }
     })

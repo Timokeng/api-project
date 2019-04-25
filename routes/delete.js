@@ -14,7 +14,8 @@ var connection = mysql.createConnection({
 connection.connect();
 
 // 构造sql语句
-var sql = 'DELETE FROM posts WHERE id=?'
+var sql = 'DELETE FROM posts WHERE id=?';
+var deleteTopSql = 'DELETE FROM top WHERE postId=?'
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -23,13 +24,18 @@ router.get('/', function(req, res, next) {
     base.sendErr(res, 1);
     return;
   }
+  // 删除帖子主体
   connection.query(sql, [params.id], function(err, result){
     if(err){
       base.sendErr(res, 2, err);
     } else{
-      res.send({
-        code: 0,
-        message: '删帖成功'
+      connection.query(deleteTopSql, [params.id], function(err){
+        res.send({
+          code: 0,
+          data: {
+            message: '删帖成功'
+          }
+        })
       })
     }
   })
