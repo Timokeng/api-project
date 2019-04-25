@@ -41,10 +41,9 @@ function sendErr(res, code, err){
 
 // 根据token获取当前用户信息
 function getCurUserInfo(req, res, next){
-  // 现在测试阶段暂不使用 var token = req.get('Authorization');
-  var token = '201904192';
+  var token = req.get('Authorization');
   if(!token){
-    sendErr(-999);
+    sendErr(res, -999);
     return;
   }
 

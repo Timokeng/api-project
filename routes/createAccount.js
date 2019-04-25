@@ -24,8 +24,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next){
   var data = req.body;
-  //var token = req.get('Authorization');
-  var token = '201904192';
+  var token = req.get('Authorization');
   connection.query(sql, [data.nickName, data.avatarUrl, token], function(err, result){
     if(err){
       base.sendErr(res, 2, err);
@@ -33,6 +32,7 @@ router.post('/', function(req, res, next){
       res.send({
         code: 0,
         data: {
+          level: global.userInfo.level,
           message: '用户信息已录入'
         }
       })
