@@ -12,11 +12,11 @@ npm install
 npm start
 ```
 
-## Function
+## Function（已完成）
 
 ```bash
 # 登录
-# 展示(已完成)
+# 展示
 # 发帖
 # 删帖
 # 修改

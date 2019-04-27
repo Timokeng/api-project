@@ -27,12 +27,13 @@ router.get('/', function(req, res, next) {
         base.sendErr(res, 2, err);
       } else{
         if(result.length){
+          var imageList = JSON.parse(result[0].images);
           res.send({
             code: 0,
             data: {
               title: result[0].title,
               message: result[0].message,
-              imageList: result[0].images
+              imageList: imageList
             }
           })
         } else{
