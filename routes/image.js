@@ -7,7 +7,8 @@ var storage = multer.diskStorage({
         cb(null, './public/images')  //这里是图片存储路劲
     },
     filename: function (req, file, cb){
-        cb(null, Date.now() + file.originalname)
+        var last = file.originalname.substring(file.originalname.lastIndexOf('\.'));
+        cb(null, Date.now() + last);
     }
 });
 var upload = multer({
